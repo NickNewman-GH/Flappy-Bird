@@ -1,0 +1,53 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Godot projects\\Flappy Bird\\Flappy Bird.csproj": {}
+  },
+  "projects": {
+    "D:\\Godot projects\\Flappy Bird\\Flappy Bird.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Godot projects\\Flappy Bird\\Flappy Bird.csproj",
+        "projectName": "Flappy Bird",
+        "projectPath": "D:\\Godot projects\\Flappy Bird\\Flappy Bird.csproj",
+        "packagesPath": "C:\\Users\\Никита Трощенко\\.nuget\\packages\\",
+        "outputPath": "D:\\Godot projects\\Flappy Bird\\.mono\\temp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Никита Трощенко\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.2, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
