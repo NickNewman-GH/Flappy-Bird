@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VAzD7qNzDOtOMm1sh1t6YlIxLW/kP8ClcAm8KuJvfF1SPLMJjnAhQUBov56E6YtpdCu6TD/sTj4VOwi/TeLTGQ==",
+  "dgSpecHash": "ikF42DPUxs+v+qHr1Q7TxnV9Rcv/hypbnDzG1F3LHH7095dMlXQZMHvwtT1SLtbB52Pd4v8b6yJX50lwzo5OZQ==",
   "success": true,
   "projectFilePath": "D:\\Godot projects\\Flappy Bird\\Flappy Bird.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Никита Трощенко\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
-    "C:\\Users\\Никита Трощенко\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.2\\microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
