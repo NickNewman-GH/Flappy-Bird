@@ -15,7 +15,7 @@ run/main_scene="res://Level/Level.tscn"
 
 [display]
 
-window/size/width=384
+window/size/width=288
 window/size/height=512
 
 [gui]

@@ -34,7 +34,6 @@ animations = [ {
 } ]
 
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
