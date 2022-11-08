@@ -28,7 +28,9 @@ func reset(pos):
 	$AnimatedSprite.speed_scale = 1
 	
 func flap():
-	if flapStrength != 0: velocity.y = -flapStrength
+	if flapStrength != 0: 
+		velocity.y = -flapStrength
+		$FlapSound.play()
 	
 func rotateUP(delta):
 	rotation_degrees -= 720 * 2 * delta
@@ -49,7 +51,8 @@ func changeVelocity(delta):
 		velocity.y = maxFallingSpeed
 		
 func rotateDown(delta):
-	rotation_degrees += velocity.y * delta
+	if velocity.y > 200:
+		rotation_degrees += (velocity.y - 200) * delta
 	if rotation_degrees > 90:
 		rotation_degrees = 90
 	

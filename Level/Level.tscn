@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/Level.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Level/Ground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Obstacle/RedObstacle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/audio/point.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/audio/hit.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/audio/die.wav" type="AudioStream" id=10]
 
 [node name="Level" type="Node"]
 script = ExtResource( 2 )
@@ -39,6 +42,23 @@ z_index = 1
 position = Vector2( 504, 456 )
 z_index = 1
 
+[node name="PointSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -25.0
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -25.0
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -25.0
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="game_over" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="timeout" from="SpawnDelayTimer" to="." method="_on_SpawnDelayTimer_timeout"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]
