@@ -11,7 +11,6 @@ func reset_position(posx):
 
 func _ready():
 	screen_size = get_viewport().size
-	print($CollisionShape2D.shape.extents)
 	size = $CollisionShape2D.shape.extents
 
 func _process(delta):

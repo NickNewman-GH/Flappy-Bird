@@ -83,7 +83,6 @@ func _on_obstacle_score_changed(body):
 	score += 1
 	$PointSound.play()
 	$HUD.change_score(str(score))
-	print(score)
 
 func _on_RestartTimer_timeout():
 	score = 0
