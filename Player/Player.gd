@@ -4,16 +4,28 @@ signal game_over
 
 var gravity = 0
 var flapStrength = 0
-const maxFallingSpeed = 400
+const maxFallingSpeed = 600
 var velocity = Vector2.ZERO
+var animations = ["Blue fly", "Yellow fly", "Red fly"]
+
+func random_animation():
+	$AnimatedSprite.animation = animations[randi() % 3]
 
 func _ready():
-	$AnimatedSprite.play("Yellow fly")
+	$AnimatedSprite.play()
 
 func start():
-	gravity = 1000
-	flapStrength = 300
+	gravity = 1600
+	flapStrength = 400
 	flap()
+	
+func reset(pos):
+	position = pos
+	gravity = 0
+	velocity.y = 0
+	rotation_degrees = 0
+	$AnimatedSprite.play()
+	$AnimatedSprite.speed_scale = 1
 	
 func flap():
 	if flapStrength != 0: velocity.y = -flapStrength
@@ -40,17 +52,12 @@ func rotateDown(delta):
 	rotation_degrees += velocity.y * delta
 	if rotation_degrees > 90:
 		rotation_degrees = 90
-		
-#func rotate_bird(delta):
-#	rotation_degrees += velocity.y * delta * 3
-#	rotation_degrees = clamp(rotation_degrees, -15, 90)
-#	print(rotation_degrees)
 	
 func _physics_process(delta):
 	if gravity == 0:
 		position.y += cos(OS.get_ticks_msec() / 100)
 	changeVelocity(delta)
-	#rotate_bird(delta)
+
 	if velocity.y > 0:
 		rotateDown(delta)
 		if rotation_degrees > -5 and $AnimatedSprite.frame == 1:

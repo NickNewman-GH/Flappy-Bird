@@ -1,31 +1,73 @@
 extends Node
-export(PackedScene) var obstacle_scene
+export(PackedScene) var green_obstacle_scene
+export(PackedScene) var red_obstacle_scene
 
 var screen_size
 var isGameStarted = false
 var score = 0
+var isGameOver = false
+var backgrounds = ["res://assets/sprites/background-day.png", "res://assets/sprites/background-night.png"]
+var obstacle_scene
+var change_timer_once = false
+
+func random_background():
+	$Background.texture = load(backgrounds[randi() % 2])
+	
+func random_pipe():
+	obstacle_scene = [green_obstacle_scene, red_obstacle_scene][randi() % 2]
+	print(obstacle_scene)
+	
+func randomize_sprites():
+	random_background()
+	random_pipe()
+	$Player.random_animation()
 
 func _ready():
 	randomize()
 	screen_size = get_viewport().size
 	$Player.position = Vector2(screen_size.x/2 - 75, screen_size.y/2)
-	#spawnObstacle()
+	randomize_sprites()
 
 func _process(delta):
-	if not isGameStarted and Input.is_action_just_pressed("click"):
+	if not isGameOver and not isGameStarted and Input.is_action_just_pressed("click"):
 		start_game()
 		isGameStarted = true
+	if $Ground.position.x < -168:
+		$Ground.position.x = $Ground.size.x
+		$Ground2.position.x = $Ground.size.x * 3
+	if isGameOver and Input.is_action_just_pressed("click"):
+		restart_game()
+	if not isGameOver and isGameStarted:
+		if not change_timer_once and score > 10:
+			$SpawnDelayTimer.wait_time -= 0.5
+			change_timer_once = true
+		if score > 25:
+			$SpawnDelayTimer.wait_time = rand_range(1, 1.5)
 		
 func start_game():
-	score = 0
-	#$Player.position = Vector2(screen_size.x/2 - 75, screen_size.y/2)
+	$HUD.hide_startgame()
 	$Player.start()
 	$StartTimer.start()
+	
+func restart_game():
+	score = 0
+	$HUD.change_score(str(score))
+	isGameStarted = false
+	isGameOver = false
+	$HUD.show_startgame()
+	$HUD.hide_gameover()
+	$Player.reset(Vector2(screen_size.x/2 - 75, screen_size.y/2))
+	get_tree().call_group('ObstacleGroup', 'start')
+	get_tree().call_group('GroundGroup', 'start')
+	get_tree().call_group('ObstacleGroup', 'destroy')
+	randomize_sprites()
+	$StartTimer.wait_time = 2
+	$StartTimer.stop()
 
 func spawn_obstacle():
 	var obstacle = obstacle_scene.instance()
 	obstacle.get_node("ScoreArea").connect("body_entered", self, "_on_obstacle_score_changed")
-	obstacle.position = Vector2(screen_size.x + 50, rand_range(75, screen_size.y - 75))
+	obstacle.position = Vector2(screen_size.x + 50, rand_range(75, screen_size.y - 175))
 	add_child(obstacle)
 
 func _on_SpawnDelayTimer_timeout():
@@ -37,9 +79,14 @@ func _on_StartTimer_timeout():
 func game_over():
 	get_tree().call_group('ObstacleGroup', 'stop')
 	get_tree().call_group('ObstacleGroup', 'disable_collision_shapes')
+	get_tree().call_group('GroundGroup', 'stop')
+	$Player.stopFlyAnimation()
+	$HUD.show_gameover()
+	isGameOver = true
 	$SpawnDelayTimer.stop()
 	$Player.flapStrength = 0
 
 func _on_obstacle_score_changed(body):
 	score += 1
+	$HUD.change_score(str(score))
 	print(score)
