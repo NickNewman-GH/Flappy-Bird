@@ -35,7 +35,6 @@ func _on_GameOverTimer_timeout():
 	$GameOverSound.play()
 	$GameOver.visible = true
 
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Hide":
 		$StartGame.visible = false
